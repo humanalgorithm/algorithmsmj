@@ -25,6 +25,6 @@ def fourzerofour(request):
                               context_instance=RequestContext(request))
 
 def home(request):
-    return render_to_response("learnmore.html",
+    return render_to_response("sort.html",
                               locals(),
                               context_instance=RequestContext(request))
