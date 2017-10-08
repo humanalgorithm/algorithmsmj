@@ -143,6 +143,6 @@ print TEMPLATE_DIRS
 
 
 MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static", "collect_static")
+STATIC_ROOT = os.path.join(BASE_DIR, "front_end", "collect_static")
 MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static", "static_dirs"),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "front_end", "static_dirs"),)
