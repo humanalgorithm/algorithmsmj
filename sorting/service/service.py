@@ -1,12 +1,12 @@
 from .factory import SortFactory
 
 class SortService(object):
-    def __init__(self, array, sort_method):
-        sort_obj = SortFactory(sort_method)
-        return self.sort(array, sort_obj)
+    def __init__(self, dataset, sort_method):
+        self._sort_obj = SortFactory().get_sort_obj(sort_method)
+        self._dataset = dataset
 
-    def sort(self, array, sort_obj):
-        return sort_obj().run_sort(array)
+    def sort(self):
+        return self._sort_obj().run_sort(self._dataset)
 
 '''
 import random
