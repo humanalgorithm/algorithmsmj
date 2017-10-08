@@ -23,3 +23,8 @@ def fourzerofour(request):
     return render_to_response("404.html",
                               locals(),
                               context_instance=RequestContext(request))
+
+def home(request):
+    return render_to_response("learnmore.html",
+                              locals(),
+                              context_instance=RequestContext(request))

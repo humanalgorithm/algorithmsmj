@@ -7,23 +7,16 @@ admin.autodiscover()
 
 from django.conf import settings
 from django.conf.urls.static import static
-
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = patterns('',
 
-         url(r'^$', 'homepage.views.home', name='home'),
-         url(r'^thank-you/$', 'homepage.views.thankyou', name='thankyou'),
-        url(r'^learnmore/$', 'homepage.views.learnmore', name='learnmore'),
-         url(r'^about-us/$', 'signups.views.aboutus', name='aboutus'),
-         url(r'^admin/', include(admin.site.urls)),
-         url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-
-         url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-         url(r'^selectionsortabout/$', 'signups.views.selectionsortabout', name='selectionsortabout'),
-         url(r'^pythonabout/$', 'signups.views.pythonabout', name='pythonabout'),
-         url(r'^.*/$', 'signups.views.fourzerofour', name='fourzerofour')
+         url(r'^$', 'homepage.views.home', name="home"),
+         url(r'^learnmore/$', 'homepage.views.learnmore', name="learnmore"),
+         url(r'^about-us/$', 'homepage.views.aboutus', name="aboutus"),
+         url(r'^pythonabout/$', 'homepage.views.pythonabout'),
+         url(r'^.*/$', 'homepage.views.fourzerofour')
 )
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,
@@ -31,4 +24,5 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
 
+urlpatterns = format_suffix_patterns(urlpatterns)
 
