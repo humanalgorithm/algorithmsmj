@@ -1,18 +1,20 @@
-from sorting import urls
-
-from django.conf import settings
-from django.conf.urls import patterns, include
-
-from homepage import urls
-from signups import urls
+from django.conf.urls import url
+from django.conf.urls import include
 
 from django.contrib import admin
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
-                       (r'admin/', include(admin.site.urls)),
-                       (r'', include('homepage.urls')),
-                       (r'', include('signups.urls')),
-                       (r'', include('sorting.urls'))
-                       )
+import homepage.urls
+
+
+
+urlpatterns = [
+               url(r'^admin/', admin.site.urls),
+               url(r'', include('sorting.urls')),
+               url(r'', include('homepage.urls')),
+               url(r'', include('signups.urls')),
+               ]
+
+
+#urlpatterns = sorting_urlpatterns

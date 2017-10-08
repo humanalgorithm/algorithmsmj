@@ -4,10 +4,8 @@ import time
 from django.views.decorators.csrf import ensure_csrf_cookie
 from multiprocessing import Queue, Process
 import threading
-import multiprocessing
-from django.shortcuts import render_to_response, RequestContext, HttpResponseRedirect
-from django.shortcuts import HttpResponse
-
+from django.shortcuts import HttpResponse, render
+maxarray = 1000
 
 def getsort(request, sortname):
     input = request.POST["array"]
@@ -92,23 +90,16 @@ def choosesort(request):
 
 
 def quicksortabout(request):
-    return render_to_response("quicksortabout.html",
-                              locals(),
-                              context_instance =RequestContext(request))
+    return render(request, "quicksortabout.html")
+
 def mergesortabout(request):
-    return render_to_response("mergesortabout.html",
-                              locals(),
-                              context_instance =RequestContext(request))
+    return render(request, "mergesortabout.html")
 
 def bubblesortabout(request):
-    return render_to_response("bubblesortabout.html",
-                              locals(),
-                              context_instance =RequestContext(request))
+    return render(request, "bubblesortabout.html")
+
 def insertionsortabout(request):
-    return render_to_response("insertionsortabout.html",
-                              locals(),
-                              context_instance =RequestContext(request))
+    return render(request, "insertionsortabout.html")
+
 def selectionsortabout(request):
-    return render_to_response("selectionsortabout.html",
-                              locals(),
-                              context_instance =RequestContext(request))
+    return render(request, "selectionsortabout.html")

@@ -1,31 +1,16 @@
-from django.shortcuts import render_to_response, RequestContext, HttpResponseRedirect
-
+from django.shortcuts import render
 
 def aboutus(request):
-    return render_to_response("aboutus.html",
-                              locals(),
-                              context_instance=RequestContext(request))
-
+    return render(request, "aboutus.html")
 
 def learnmore(request):
-    return render_to_response("learnmore.html",
-                              locals(),
-                              context_instance=RequestContext(request))
-
+    return render(request, "learnmore.html")
 
 def pythonabout(request):
-    return render_to_response("pythonabout.html",
-                              locals(),
-                              context_instance=RequestContext(request))
-
+    return render(request, "pythonabout.html")
 
 def fourzerofour(request):
-    return render_to_response("404.html",
-                              locals(),
-                              context_instance=RequestContext(request))
-
+    return render(request, "404.html")
 
 def home(request):
-    return render_to_response("sort.html",
-                              locals(),
-                              context_instance=RequestContext(request))
+    return render(request, "sort.html")

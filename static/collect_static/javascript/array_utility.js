@@ -1,5 +1,3 @@
-
-
 function createArray()
 {
    var node = document.getElementById('div2')
@@ -37,11 +35,13 @@ function resetarray() {
 
 }
 
-function getrandom() {
+function getrandomArray() {
     var url = "/choosesort/";
     var arraysize = 90;
     $('#div3').text(document.getElementById('div2').innerHTML)
-    csrf_token = document.getElementById('token').getElementsByTagName("input")[0].value;
+
+    var node = document.getElementById('token');
+    csrf_token = "{{ csrf_token }}";
     var arraysizeselect = document.getElementById('arraysize').value;
     if (arraysizeselect == parseInt(arraysizeselect, 10) && arraysizeselect != 0) {
         $("#time").text("");
