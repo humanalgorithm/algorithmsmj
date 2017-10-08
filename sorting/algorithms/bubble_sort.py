@@ -15,7 +15,6 @@ class BubbleSort(Sort):
             j = 0
             # last i elements will always be sorted
             while j < len(dataset) - 1 - i:
-                # print "in j loop with j:" + str(j)
                 if dataset[j] > dataset[j + 1]:
                     temp = dataset[j + 1]
                     dataset[j + 1] = dataset[j]

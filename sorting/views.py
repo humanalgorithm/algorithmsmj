@@ -1,13 +1,15 @@
 import json
-import sort
 import time
 from django.views.decorators.csrf import ensure_csrf_cookie
 from multiprocessing import Queue, Process
 import threading
 from django.shortcuts import HttpResponse, render
-maxarray = 1000
+from dataset.dataset_builder import DatasetBuilder
+
 
 def getsort(request, sortname):
+    pass
+    '''
     input = request.POST["array"]
     decoded = json.loads(input)
     if decoded[0] == None:
@@ -52,6 +54,7 @@ def getsort(request, sortname):
         "time": elapsed_time
           })
         return HttpResponse(json.dumps(data), content_type='application/json')
+    '''
 
 def mergesort(request):
     sortname = "mergesort"
@@ -73,20 +76,14 @@ def insertionsort(request):
     sortname = "insertionsort"
     return getsort(request,sortname)
 
-def getdata(request):
-    returnarray = sort.randomize()
-    return HttpResponse(json.dumps(returnarray), content_type='application/json')
-
-def choosesort(request):
-    global maxarray
-    arraysize = request.POST["arraysize"]
-    if int(arraysize) > int(maxarray):
-        return HttpResponse(status=500, content_type='application/json')
-    try:
-        returnarray = sort.randomize(arraysize)
-    except:
-        return HttpResponse(status=500, content_type='application/json')
-    return HttpResponse(json.dumps(returnarray), content_type='application/json')
+def get_random_dataset(request):
+    arraysize = request.POST.get("dataset_size")
+    return_msg = DatasetBuilder().get_random_dataset(arraysize)
+    status_code = 200
+    if return_msg == -1:
+        return_msg = {"error": "Requested array size is too big"}
+        status_code = 400
+    return HttpResponse(json.dumps(return_msg), content_type='application/json', status=status_code)
 
 
 def quicksortabout(request):
