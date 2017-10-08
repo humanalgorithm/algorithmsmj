@@ -1,6 +1,6 @@
-function sortsubmit(sortname, csrf_token) {
+function sortsubmit(sortname) {
     var url = sortname + "/";
-    //csrf_token = "{{ csrf_token }}";
+    csrf_token = "{{ csrf_token }}";
     var arraysize = 90;
     $('#div3').text(document.getElementById('div2').innerHTML);
     var array = createArray();
@@ -16,7 +16,7 @@ function sortsubmit(sortname, csrf_token) {
             csrfmiddlewaretoken: csrf_token
         },
 
-        success: function (data) {
+        success: function (data) {    //window.alert("in success!")
             var getData = JSON.parse(data);
 
             if (getData.error != "timeout") {

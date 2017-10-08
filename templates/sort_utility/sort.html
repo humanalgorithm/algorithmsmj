@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'component/base.html' %}
 
 
 {% block jumbotron %}
-{% include 'navbar.html' %}
+{% include 'component/navbar.html' %}
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
@@ -16,8 +16,8 @@
         <p1><a class="btn btn-primary btn-lg" href="/learnmore" role="button">Learn more &raquo;</a></p1>
     </div>
 </div>
-<script src="/static/javascript/array_utility.js"></script>
-<script src="/static/javascript/sort_submit.js"></script>
+<script type="text/javascript" src="/static/javascript/array_utility.js"></script>
+<script tyoe="text/javascript" src="/static/javascript/sort_submit.js"></script>
 
 {% include 'sortui.html' %}
 {% include 'sortbuttontable.html' %}
@@ -25,7 +25,7 @@
 {% endblock %}
 
 {% block content %}
-{% include 'info_table.html' %}
-{% include 'contactForm.html'%}
+{% include 'component/info_table.html' %}
+{% include 'component/contactForm.html'%}
 
 {% endblock %}

@@ -1,11 +1,9 @@
-from django.conf.urls import patterns, url
-from rest_framework.urlpatterns import format_suffix_patterns
+from django.conf.urls import url
 import views
+from views import thankyou, signup
 
-urlpatterns = patterns('',
-                    url(r'^api/$', views.SignUpList.as_view()),
-                    url(r'^thank-you/$', 'signups.views.thankyou', name='thankyou'),
-                    url(r'^signup/$', 'signups.views.signup', name='signup'),
-                       )
+urlpatterns = [url(r'^api/$', views.SignUpList.as_view()),
+               url(r'^thank-you/$', thankyou, name='thankyou'),
+               url(r'^signup/$', signup, name='signup'),
+               ]
 
-urlpatterns = format_suffix_patterns(urlpatterns)

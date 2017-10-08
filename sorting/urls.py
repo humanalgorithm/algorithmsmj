@@ -1,16 +1,12 @@
-from django.conf.urls import patterns, include, url
-from rest_framework.urlpatterns import format_suffix_patterns
+from django.conf.urls import url
+from views import choosesort, quicksort, bubblesort, mergesort, insertionsort, selectionsort, getdata
 
-urlpatterns = patterns('',
-                    url(r'^choosesort/$', 'sorting.views.choosesort'),
-                    url(r'^quicksort/$', 'sorting.views.quicksort'),
-                    url(r'^bubblesort/$', 'sorting.views.bubblesort'),
-                    url(r'^mergesort/$', 'sorting.views.mergesort'),
-                    url(r'^insertionsort/$', 'sorting.views.insertionsort'),
-                    url(r'^selectionsort/$', 'sorting.views.selectionsort'),
-                    url(r'^getdata/$', 'sorting.views.getdata'),
-                      )
-
-urlpatterns = format_suffix_patterns(urlpatterns)
-
-
+urlpatterns = [
+               url(r'^choosesort/$', choosesort, name="choosesort"),
+               url(r'^quicksort/$', quicksort, name="quicksort"),
+               url(r'^bubblesort/$', bubblesort, name="bubblesort"),
+               url(r'^mergesort/$', mergesort, name="mergesort"),
+               url(r'^insertionsort/$', insertionsort, name="insertionsort"),
+               url(r'^selectionsort/$', selectionsort, name="selectionsort"),
+               url(r'^getdata/$', getdata, name="getdata"),
+               ]
