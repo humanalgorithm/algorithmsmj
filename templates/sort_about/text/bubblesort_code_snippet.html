@@ -1,0 +1,64 @@
+<pre> <code>
+
+#with comments
+def bubbleSort(listIn):
+    temp = 0
+    #initialize outer loop counter
+    i = 0
+    #initialize inner loop counter
+    j=0
+    #set the number of passes to make to the length of the array
+    numPasses = len(listIn)
+    #set boolean holder whether array is sorted or not
+    sorted = False
+
+    #loop through outer loop the length of the array times
+    while i < numPasses:
+        #if inner loop went through and each element was sorted then break out of outer loop
+        if sorted == True:
+            break
+        #assume sorted true when going into inner loop
+        sorted = True
+        #initialize inner loop counter
+        j=0
+
+        #last i elements will always be sorted so do inner loop length of list-i-1
+        while j < len(listIn)-1-i:
+            #if previous element is greater than next element then do a swap
+            if listIn[j] > listIn[j+1]:
+                temp = listIn[j+1]
+                listIn[j+1] = listIn[j]
+                listIn[j] = temp
+                #note that array wasn't sorted
+                sorted = False
+            j+=1
+        i+=1
+    return listIn
+
+</code></pre>
+
+<br>
+<pre> <code>
+#without comments
+def bubbleSort(listIn):
+    temp = 0
+    i = 0
+    j=0
+    numPasses = len(listIn)
+    sorted = False
+    while i < numPasses:
+        if sorted == True:
+            break
+        sorted = True
+        j=0
+        while j < len(listIn)-1-i:
+            if listIn[j] > listIn[j+1]:
+                temp = listIn[j+1]
+                listIn[j+1] = listIn[j]
+                listIn[j] = temp
+                sorted = False
+            j+=1
+        i+=1
+    return listIn
+
+</code></pre>

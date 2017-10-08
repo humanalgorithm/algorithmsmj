@@ -1,0 +1,50 @@
+.jumbotron {
+background-color: #17D1FF;
+background-image: url("/static/css/matrix.jpg");
+}
+
+.center-block.centerblueborder.regfont{
+   font-size:15px;
+  }
+
+.center-block.centerblueborder{
+word-wrap: break-word;
+text-align: center;
+width:80%;
+border-style: solid;
+border-width: 7px;
+ border-color: lightblue;
+ font-size: 30px;
+  }
+
+.centerblueborder {
+word-wrap: break-word;
+text-align:center;
+width:80%;
+border-style: solid;
+border-width: 7px;
+ border-color: lightblue;
+ font-size: 30px;
+  }
+
+.container p1 {
+   color: white;
+   font: bold 24px/45px Helvetica, Sans-Serif;
+   letter-spacing: -1px;
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.7);
+   padding: 10px;
+}
+
+
+#menuleftcontent{
+    float: right;
+    width: 200px;
+    margin-right: -200px;
+    background-color: #CCCCCC;
+
+ .row2 {
+  margin-right: -50px;
+  margin-left: -50px;
+}
+
