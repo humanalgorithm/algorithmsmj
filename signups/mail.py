@@ -11,8 +11,7 @@ class MailSender(object):
                        ' Let me know of any feed back you have and how I can make the website better.'  \
                       ' If you would like to reach me just reply to this email and I will get back to you promptly. ' \
                        '\n\n Thank you and have a good day!'\
-                      '\n\n Michael Scotto\n Web Developer\nNew York City Metropolitan Area\n\n' \
-                      '\"More important than the height of the ladder is the wall it is leaning against.\"'
+                      '\n\n Michael Scotto\n Web Developer\nNew York City Metropolitan Area\n\n'
 
 
     def send_mail_to_signup(self, form, request):

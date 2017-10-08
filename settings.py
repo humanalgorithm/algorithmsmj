@@ -87,8 +87,7 @@ STATIC_URL = '/static/'
 
 #Template location
 
-TEMPLATE_DIRS = (os.path.join(BASE_DIR,"static","templates")),
-print "templates path is ", TEMPLATE_DIRS
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, "templates")),
 
 if DEBUG:
     MEDIA_URL = '/media/'
