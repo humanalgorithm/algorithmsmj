@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block jumbotron %}
+{% include 'navbar.html' %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+   <div class="jumbotron">
+      <div class="container">
+       <div class = "row">
+       <div class="col-md-7"> </div>
+           <div class="col-md-8">
+             <p1> This page was written by Michael Scotto, specializing in Python/Django, Ruby on Rails and Java EE. Fill out the form below to receive an email from his personal email address.</p1>
+                 <p1><a class="btn btn-primary btn-lg" href="/" role="button">Back to Home &raquo;</a></p1>
+               </div>
+             <div class="col-md-3">
+                 </div>
+           </div>
+
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+<div class = 'center-block centerblueborder regfont' >
+ {%include 'contactForm.html' %}
+</div>
+{% include 'table.html' %}
+
+{% endblock %}

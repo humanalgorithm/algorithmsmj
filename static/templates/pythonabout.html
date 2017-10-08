@@ -1,0 +1,474 @@
+{% extends 'base.html' %}
+
+
+{% block jumbotron %}
+{% include 'navbar.html' %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <p1> Python is a widely popular programming language partly due to its ease to learn. There is a high
+                    immediacy to Python in that a developer can write a program with little overhead similar to
+                    scripting langauges.
+                </p1>
+
+                <br><br>
+                <p1> The Django Framework creates a web framework that allows you to quickly deploy web applications
+                    with a backend written in Python. The structure of Python/Django is similar
+                    to Ruby on Rails for those that have used RoR before.
+                </p1>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<h1> Below is a list of all of the technologies and frameworks used to build this page. A summary of how they were used
+    will give you insight into how these technologies work together
+    to create one application. </h1>
+<ul>
+    <li><a class="btn btn-primary" href="#python" role="button"> Python</a></li>
+    <li><a class="btn btn-primary" href="#django" role="button">Django</a></li>
+    <li><a class="btn btn-primary" href="#javascript" role="button">Javascript/Ajax</a></li>
+    <li><a class="btn btn-primary" href="#jquery" role="button">JQuery</a></li>
+    <li><a class="btn btn-primary" href="#json" role="button">JSON over REST</a></li>
+    <li><a class="btn btn-primary" href="#bootstrap" role="button">Bootstrap Themes</a></li>
+    <li><a class="btn btn-primary" href="#css" role="button">CSS</a></li>
+    <li><a class="btn btn-primary" href="#aws" role="button">Amazon Web Services</a></li>
+    <li><a class="btn btn-primary" href="#dns" role="button">Domain Name Services</a></li>
+    <li><a class="btn btn-primary" href="#linux" role="button">Linux Debian</a></li>
+
+</ul>
+
+<a name="python"><h1 style="padding-top: 40px; margin-top: -40px;"></h1></a>
+<div class="row" width="70%">
+
+    <div class="col-lg-12">
+        <h2>Python</h2>
+
+        <p> Python allows you to write code without all of the overhead of other languages. For example if you were to
+            print a program called
+            print.py with the code
+        <pre><code>print "Hello World!"</code></pre>
+        this would be enough to execute. You do not need to go through all of the trouble of setting up
+        classes. For those that would like to get started with Python a great resource is <a
+            href="http://codeskulptor.org">codeskulptor.org</a> whhich provides
+        an immediate interface for you to write Python code in. </p>
+        Some of the reasons that have been noted for using Python are as follows:
+        <ul>
+            <li> Easy and simple to learn</li>
+            <li> Cross Platform</li>
+            <li> Readability of code</li>
+            <li> Open source community</li>
+            <li> High perfromance</li>
+        </ul>
+        <p>For this website all of the sorting functions are written in the sort.py file. This allows us the seperation
+            of the backend logic from the front end code. If we wanted to
+            write additional sorting fucntions without affecting the rest of the website we could just add them (and
+            test them) within this one file.
+        </p>
+
+    </div>
+</div>
+<a name="django"><h1 style="padding-top: 40px; margin-top: -40px;"></h1></a>
+<div class="row" width="70%">
+    <div class="col-lg-12">
+        <h2>Django </h2>
+
+        <p>Django is a web framework that allows developers to write code in Python on the backend. Similar to other web
+            frameworks (such as Ruby on Rails).
+            Django uses a model/view/controller architecture however with a slight difference - Django is
+            model/view/template. Django is centered around using templates in order to display your web pages
+        </p>
+
+        <p>
+            In a Django implementation there are a few core files that the developer will modify to bulid the
+            application. These files are:
+        <ul>
+            <li> settings.py</li>
+            <li> urls.py</li>
+            <li> models.py</li>
+            <li> views.py</li>
+        </ul>
+        </p>
+
+        <p> The <b>settings.py</b> file contains configurations for middleware, installed application, directories for
+            templates and database engines to use.
+            For each application you write you will need to specify the settings that match what you are trying to
+            achieve or the application might not run correctly.
+        </p>
+
+        <p> The <b>urls.py</b> file uses regular expressions to determine where a request should be routed. Every time a
+            user sends a request to Django it will look at the urls.py and see
+            if there are any matching patterns to route the request. Here is a sample of the urls.py for this
+            application:
+        </p>
+      <pre><code>
+          from django.conf import settings
+          from django.conf.urls.static import static
+
+          urlpatterns = patterns('',
+
+          url(r'^$', 'signups.views.home', name='home'),
+          url(r'^thank-you/$', 'signups.views.thankyou', name='thankyou'),
+          url(r'^about-us/$', 'signups.views.aboutus', name='aboutus'),
+          url(r'^admin/', include(admin.site.urls)),
+          url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+          url(r'^signups/', include('signups.urls')),
+          url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+          url(r'^learnmore/$', 'signups.views.learnmore', name='learnmore'),
+          url(r'^quicksortabout/$', 'signups.views.quicksortabout', name='quicksortabout'),
+          url(r'^mergesortabout/$', 'signups.views.mergesortabout', name='mergesortabout'),
+          url(r'^bubblesortabout/$', 'signups.views.bubblesortabout', name='bubblesortabout'),
+          url(r'^insertionsortabout/$', 'signups.views.insertionsortabout', name='insertionsortabout'),
+          url(r'^selectionsortabout/$', 'signups.views.selectionsortabout', name='selectionsortabout'),
+          url(r'^pythonabout/$', 'signups.views.pythonabout', name='pythonabout'),
+          url(r'^.*/$', 'signups.views.fourzerofour', name='fourzerofour')
+          )
+      </code> </pre>
+
+        <p>The <b>models.py</b> is where you store information about your models(data). Here you can define the
+            structure of your data for Django to work with.
+            Here is an exceprt from the models.py for this website that defines the signups from the signup form on the
+            main page: </p>
+       <pre><code>
+           class SignUp(models.Model):
+           first_name = models.CharField(max_length=120, null=True, blank=True)
+           last_name = models.CharField(max_length=120, null=True, blank=True )
+           email=models.EmailField()
+           timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+           updated=models.DateTimeField(auto_now_add=False, auto_now=True)
+
+           def __unicode__(self):
+           return self.email
+
+       </code></pre>
+
+    </div>
+    <p>Finally the <b>views.py</b> is where you define in response to requests that are routed to the server. In
+        alignment with the urls.py file the name of the
+        functions on the views.py will match what is called in the urls.py file. For example in the urls.py we called
+        the /learnmore page as follows:
+    </p>
+    <pre><code> url(r'^learnmore/$', 'signups.views.learnmore', name='learnmore')</code></pre>
+    Now the corresponding code in the views.py file be as follows to catch the function:
+         <pre> <code>
+             def learnmore(request):
+
+             return render_to_response("learnmore.html",
+             locals(),
+             context_instance =RequestContext(request))
+         </code></pre>
+    <p>
+        Essentially what this does is whenever the learnmore function is called, it will take the request, create an
+        HttpResponse object and then
+        pass the learnmore.html in an HttpResponse object back to the user.
+    </p>
+</div>
+<a name="javascript"><h1 style="padding-top: 40px; margin-top: -40px;"></h1></a>
+<div class="row" width="70%">
+    <div class="col-lg-12">
+        <h2>JavaScript/AJAX</h2>
+
+        <p>Javascript is a very widely popular language because of it's ease to include into a webpage and run logic
+            from the client's machine. It is worth noting that now
+            Javascript can be run from the server side using node.js</p>
+
+        <p> Whenever the you want to check a form, dynamically update a webpage without reloading or perform a
+            calculation without making a request Javascript is the tool to use. For example
+            whenever a user clicks on the "Reset array" button a Javascript function is called from the button as
+            follows: </p>
+        <pre> <code> < input type = "button" class = 'btn btn-success center-block' onclick="resetarray()" value="Unsort
+            Array" > </code></pre>
+        <p>
+            The reset array works by going to a hidden div (div3) where the last array was stored and then restoring it
+            back to the visible div(div1) and saving a copy
+            in another hidden div(div2) for next use. The array size is used to cut off the visible array once it
+            exceeds that size.
+        </p>
+       <pre> <code>
+           function resetarray()
+           {
+           var arraysize = 90;
+           var lastarray = document.getElementById('div3').innerHTML
+
+           if (lastarray.length == 0)
+           { }
+           else
+           {
+           $('#div2').text(lastarray);
+           var shortarray = shortenArray(arraysize)
+
+           if (shortarray.length > = arraysize)
+           { $('#div1').text(shortarray + "..."); }
+           else
+           {$('#div1').text(shortarray); }
+
+           $('#time').text("Time to Execute\:");
+           }
+       </code> </pre>
+
+        <p>
+            <b> Ajax</b> is a very important tool used in modern webpages. It allows a webpage to perform functions and
+            update the page without reloading. For the purposes of this website
+            Ajax was used to submit a request to the server, receive the response and update the page accordingly. Here
+            is where Ajax makes a request to the server behind the scenes: </p>
+             <pre> <code>
+
+                 $.ajax({
+                 type: "POST",
+                 url: url,
+                 data: {arraysize: arraysizeselect,
+                 csrfmiddlewaretoken: csrf_token
+                 },
+                 success: function(data)
+                 {
+                 $('#div2').text(data);
+                 var shortarray = shortenArray(arraysize);
+                 if (shortarray.length >=arraysize)
+                 { $('#div1').text(shortarray + "..."); }
+                 else
+                 {$('#div1').text(shortarray); }
+
+                 $('#div1').css({"font-size": "20px"});
+                 $('#time').text("Time to Execute\:");
+                 },
+                 error: function(data)
+                 {
+                 //window.alert("in error");
+                 $('#time').text("Array too big: please enter a shorter array size");
+                 $('#time').css({"font-size": "20px"});
+                 }
+                 });
+             </code></pre>
+        <p>
+            The .$.ajax function sets a call to the server, receives the response in the success or error function and
+            updates the pages accordingly using JQuery.
+        </p>
+    </div>
+</div>
+<a name="jquery"><h1 style="padding-top: 40px; margin-top: -40px;"></h1></a>
+<div class="row" width="70%">
+    <div class="col-lg-12">
+        <h2>jQuery </h2>
+
+        <p> JQuery is a JavaScript libary that makes it easier to do things like document traversal and page
+            manipulation. In this website JQuery is used to
+            modify divs on the page. Without JQuery we are still able to use JavaScript to make modifications to the
+            page however it is easier and simpler with
+            jQuery. Another feature of jQuery is that it will display elements even when JavaScript is disabled. Here is
+            an example of jQuery modify div elements on the page: </p>
+
+         <pre> <code>
+             $('#time').text("Array too big: please enter a shorter array size");
+             $('#time').css({"font-size": "20px"});
+         </code></pre>
+        <p> Here jQuery is calling the div with the id "time" and modify the text inside. </p>
+
+    </div>
+</div>
+<a name="json"><h1 style="padding-top: 40px; margin-top: -40px;"></h1></a>
+<div class="row" width="70%">
+    <div class="col-lg-12">
+        <h2>JSON over REST</h2>
+
+        <p>JSON is used as a way of organizing data to be passed over the web. JSON is used to break down objects into
+            strings that can be read back by
+            a different kind of platform. The great thing about JSON is that it allows a program to pass data to another
+            program regardless of what is running on the other side
+            as long as it accepts JSON messages. In the case of this website JSON is being passed from a JavaScript
+            front end to a Django web server backend. </p>
+
+        <p> Here is an example of what a JSON message might look like as it is transmitted: </p>
+         <pre> <code>
+             {\"array\": [1139, 2574, 4414, 7095, 8266, 9278], \"time\": 0.004565375466110427}"
+         </code></pre>
+        <p> In this example the data that is being passed is a variable called "array" with value [1139, 2574, 4414,
+            7095, 8266, 9278] and a variable named "time"
+            with the value 0.004565375466110427. From the JavaScript side we can parse this JSON data with the following
+            line: </p>
+        <pre> <code> JSON.parse(data); </code></pre>
+        <p> Where data is the response object passed back by the server. On the Django side we can construct JSON
+            objects to pass back to the client. Here is an example: </p>
+        <pre> <code>
+            data = json.dumps({
+            "array": returnarr,
+            "time": elapsed_time
+            })
+            return HttpResponse(json.dumps(data), content_type='application/json
+        </code></pre>
+        <p> What we are doing here is constructing a JSON object using the json.dumps function, assigning variable names
+            and assigning values to them. Finally
+            we can return an HttpResponse object back to the client with the json parsed data. </p>
+
+        <p><b> REST</b> which stands for Representational State Transfer is a communications protocol that allows us to
+            pass data over the web. If you are familiar with web development
+            then you probably know REST as the common HTTP messages GET, POST, PUT and DELETE. In this application we
+            set up Django to be able to handle these types of messages using the following import</p>
+        <pre> <code>from rest_framework import serializers</code></pre>
+        <p> Also we want to set up our Django server to install the package requirements for REST</p>
+        <pre> <code>pip install djangorestframework</code></pre>
+        <p> Finally we need to add the rest_framework to our installed apps in the <b> settings.py</b> file</p>
+      <pre> <code>
+          INSTALLED_APPS = (
+          ...
+          'rest_framework'
+          ...
+          )
+      </code></pre>
+    </div>
+</div>
+
+<a name="bootstrap"><h1 style="padding-top: 40px; margin-top: -40px;"></h1></a>
+<div class="row" width="70%">
+    <div class="col-lg-12">
+        <h2>Bootstrap Themes</h2>
+
+        <p>This website uses the Jumbotron theme from the getbootstrap.com website. This is a great place to pick up
+            themes for your website that make it easier to come up with a good
+            looking website in no time. You can download the Jumbotron theme <a
+                    href="http://getbootstrap.com/examples/jumbotron/">Here.</a></p>
+
+        <p> With each one of the Bootstrap themes there is a list of components that come with it. In our HTML and CSS
+            we can get an idea of how to use and modify these by going
+            to the <a href="http://getbootstrap.com/components/">Components Webpage</a>. Here is a screenshot of the
+            components webpage where we can see how to use the buttons
+            that are included with the theme:</p>
+
+        <img src="/static/css/components.png">
+
+    </div>
+</div>
+
+<a name="css"><h1 style="padding-top: 40px; margin-top: -40px;"></h1></a>
+<div class="row" width="70%">
+    <div class="col-lg-12">
+        <h2>CSS</h2>
+
+        <p>CSS is the bread and butter for styling web pages. Inevitably when we are working on a web page we will need
+            to have some basic knowledge of CSS
+            even if we are mostly working on the logic. Some modifications were made to the CSS that was provided in the
+            theme by creating a custom.css to override some
+            styling behavior. Here is the custom.css that was added to theme: </p>
+        <pre><code>
+            .jumbotron {
+            background-color: #17D1FF;
+            background-image: url("/static/css/matrix.jpg");
+            }
+
+            .center-block.centerblueborder{
+            word-wrap: break-word;
+            text-align: center;
+            width:80%;
+            border-style: solid;
+            border-width: 7px;
+            border-color: lightblue;
+            font-size: 30px;
+            }
+
+            .container p1 {
+            color: white;
+            font: bold 24px/45px Helvetica, Sans-Serif;
+            letter-spacing: -1px;
+            background: rgb(0, 0, 0); /* fallback color */
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            }
+
+        </code></pre>
+        <p> The .jumbotron override was used to include a background image in the container that holds the top of the
+            page. The .center-block.centerblueborder was
+            used to provide the light blue highlight around the "Please select array size" and "Time to execute" areas.
+            Finally the .container p1 class override was
+            used to set the semi-transparent bacground of the text at the top of each page. </p>
+    </div>
+</div>
+
+
+<a name="aws"><h1 style="padding-top: 40px; margin-top: -40px;"></h1></a>
+<div class="row" width="70%">
+    <div class="col-lg-12">
+        <h2>Amazon Web Services</h2>
+
+        <p>Amazon Web Services is a convenient service that allows us to set up a server directly and customize as much
+            as we wish. This is a great feature over
+            typical web hosts as it gives us a lot more reach into the functionality of server. Below is an image of the
+            console once one logs into Amazon Web Services </p>
+        <br>
+        <img src="/static/css/aws.png">
+        <br> <br>
+
+        <p> The way that we use AWS is that we find an instance that matches our needs, select the size of the server,
+            deploy it and then log into it using SSH. In this case the kind of server
+            that was used was the "Django - High-level Python Web Framework provided by TurnKey Linux" server. After
+            logging into this server minimal setup is needed to configure the Django server
+            which allows us to get our application up and running relatively quickly. We can start or stop our server at
+            whichever time we wish. We can perform any updates or security checks that we would like
+            as if it were our very own server. </p>
+
+        <p> One thing in particular we need to pay attention to in order to SSH into our server is to pass in the
+            private key when we login. If we are using Putty to SSH we want to make sure that we load the
+            private key into Putty. The below screen shot shows how we want to navigate to the "Auth" tab and select the
+            location of the private key.
+            <br> <br>
+            <img src="/static/css/putty.png">
+    </div>
+</div>
+
+<a name="dns"><h1 style="padding-top: 40px; margin-top: -40px;"></h1></a>
+<div class="row" width="70%">
+    <div class="col-lg-12">
+        <h2>Domain Name Services using GoDaddy</h2>
+
+        <p>
+            In order to route the server provided by Amazon Web Services to a algorithmsMJ.com we need to purchase a
+            domain name and set up the DNS A record. Eseentially what this does is provide a mapping
+            between the name "algorithmMJ.com" and the IP address of the server hosted by Amazon Web Services (note that
+            the IP address of the server will change every time we restart it with AWS).
+        </p>
+
+        <p>In order to set this up we need to login to our console on GoDaddy.com once we have purchased the domain
+            name. The first step is to go to the DNS Zone tab in GoDaddy: </p>
+        <img src="/static/css/godaddy1.png">
+
+        <p><br> <br> After this we set up where the A record is pointing to by putting in the IP address of the server:
+            <br> <br></p>
+        <img src="/static/css/godaddy2.png">
+
+        <p><br><br>Once this gets entered it will take some time for this to propogate to the DNS servers on the
+            internet. According to GoDaddy it can take up to 48 hours for this to take effect(try to be patient!). </p>
+
+    </div>
+</div>
+
+<a name="linux"><h1 style="padding-top: 40px; margin-top: -40px;"></h1></a>
+<div class="row" width="70%">
+    <div class="col-lg-12">
+        <h2>Linux Debian</h2>
+
+        <p>Linux comes in many different flavors but for the Django server that Amazon Web Services provides it is a
+            Debian distribution. Running our Django server on
+            top of Linux instead of Windows is slightly different in how we want to set it up. Both Windows and Linux
+            use the <b> pip install django </b> command
+            in order to install Django so there is similarity there but installing package dependencies is different(and
+            typically easier) in Linux. </p>
+    </div>
+</div>
+
+
+<div class="row" width="70%">
+    <div class="col-lg-12">
+        <h2>Summary</h2>
+
+        <p> Now you have an idea of the basket of technologies that work together to run this website. Happy coding!</p>
+    </div>
+</div>
+
+{% include 'table.html' %}
+{% endblock %}

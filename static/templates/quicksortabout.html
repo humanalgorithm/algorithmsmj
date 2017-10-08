@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+
+{% block jumbotron %}
+{% include 'navbar.html' %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7"></div>
+            <div class="col-md-8">
+                <p1> Quick sort is an algorithm with an average case run time of O(n log(n)) and a worst case run time
+                    of O(n^2). Quick sort works by recursively selecting a pivot element and then placing elements
+                    lesser than
+                    the pivot to the left of the pivot and elements greater than the pivot to the right of the pivot.
+                    Quick sort recurisvely calls this organization around a pivot down until there is only one element.
+
+
+                    <br><br> There are various different implementations of how to select the pivot element but for the
+                    most part if the pivot is randomly selected then it has the best chance of keeping an O(n log(n))
+                    run time
+                    as the chance of pickingg the worst pivot element is evenly distributed.
+                </p1>
+                <p1><a class="btn btn-primary btn-lg" href="#sortutility" role="button">Use Quick Sort &raquo;</a></p1>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block content %}
+<a name="sortutility"><h1 style="padding-top: 40px; margin-top: -40px;"></h1></a>
+{% include 'sortutility.html' %}
+{% include 'quicksortbutton.html' %}
+<div class="row">
+    <div class="col-md-1"></div>
+
+    <div class="col-md-10">
+<pre> <code>
+    #with comments
+    def quickSort(lo, hi):
+    global mylist
+    #initialize the high position of the array
+    hi = int(hi)
+    #initialize the low position of the array
+    lo = int(lo)
+    #base case if the length of the array is 1
+    if(hi-lo) <1:
+    return
+
+    #j will mark the position where less than j contains elements less than or equal to the pivot and
+    #greater than j contains elements greater than or equal to the pivot
+    j = partition(lo,hi)
+
+    #run quicksort from low to j
+    quickSort(lo, j)
+    #run quicksort from j+1 to high
+    quickSort(j+1,hi)
+
+    def partition(lo, hi):
+    global mylist
+    #initialize i to be i -1 as we will add 1 in first loop
+    i = lo-1
+    #initialize j to be hi + 1 as we will subtract one on first pass
+    j = hi+1
+    #set pivot to be the same as the low element
+    pivot = lo
+    #initialize temp variable
+    temp = 0
+
+    #use exit variable to m ark when we may exit from the loop
+    exit = False
+
+    #outer loop with two loops in it. This loop keeps going until array at [j] is less than array at [pivot] and j is
+    less
+    #than i.
+    #Exit variable will be marked as true to exit this loop
+    while exit == False:
+    #first loop: go from low to high until find an element that is greater or equual to the pivot then move on to
+    #the second loop
+    while i <= hi:
+    #increment i on first first pass (this moves it from -1 to 0 on first pass)
+    i=i+1
+    #if current element is greater than the pivot then stop this loop
+    if mylist[i] >= mylist[pivot]:
+    break
+    #second loop go backwards from high element to low and swap
+    while j >= lo:
+    #move j backwards until it is at low element
+    j = j - 1
+    #if array at j is less than the pivot
+    if mylist[j] <= mylist[pivot]:
+    #once j and i cross do no swaps and mark for exit
+    if j <=i:
+    exit = True
+    break
+    if i==pivot:
+    pivot = j
+    #do a swamp between j and i
+    temp = mylist[i]
+    mylist[i] = mylist[j]
+    mylist[j] = temp
+    break
+    #return where j stopped doing comparisons which marks the division point between elements less than the pivot and
+    #elements greater than the pivot
+    return j
+
+</code></pre>
+        <br>
+<pre> <code>
+    #without comments
+    def quickSort(lo, hi):
+    global mylist
+
+    hi = int(hi)
+    lo = int(lo)
+    if(hi-lo) <1:
+    return
+
+    j = partition(lo,hi)
+    quickSort(lo, j)
+    quickSort(j+1,hi)
+
+    def partition(lo, hi):
+    global mylist
+    i = lo-1
+    j = hi+1
+    pivot = lo
+    temp = 0
+    exit = False
+
+    while exit == False:
+    while i <= hi:
+    i=i+1
+    if mylist[i] >= mylist[pivot]:
+    break
+    while j >= lo:
+    j = j - 1
+    if mylist[j] <= mylist[pivot]:
+    if j <=i:
+    exit = True
+    break
+    if i==pivot:
+    pivot = j
+    temp = mylist[i]
+    mylist[i] = mylist[j]
+    mylist[j] = temp
+    break
+    return j
+</code></pre>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+{% include 'table.html' %}
+
+
+{% endblock %}

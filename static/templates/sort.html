@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block jumbotron %}
+{% include 'navbar.html' %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+
+        <p1>Welcome to the algorithm demo page. This page was developed in Python running on top of the Django web
+            framework.
+        </p1>
+        <p1>On this page you can initialize an array, sort it using different algorithms and compare the runtimes of
+            each algorithm.
+        </p1>
+        <p1><a class="btn btn-primary btn-lg" href="/learnmore" role="button">Learn more &raquo;</a></p1>
+    </div>
+</div>
+
+{% include 'sortutility.html' %}
+{% include 'buttontable.html' %}
+
+{% endblock %}
+
+{% block content %}
+{% include 'table.html' %}
+{% include 'contactForm.html'%}
+
+{% endblock %}

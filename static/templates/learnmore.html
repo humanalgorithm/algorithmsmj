@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block jumbotron %}
+{% include 'navbar.html' %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+
+        <p1>This page is dedicated to the understanding of sorting algorithms and the frameworks used to create this
+            website. The verbatim code that is executed on the backend for each
+            sorting algorithm is displayed in a code frame on each respective sorting algorithm page. When you execute
+            each sorting algorithm the code that you see is the code that will execute
+        </p1>
+        <p1></p1>
+
+    </div>
+</div>
+
+{% endblock %}
+{% block content %}
+
+
+<div class="center-block centerblueborder"><h1 style="text-align:center"> How to use this page </h1>
+    <h4>
+        <ul style="text-align:left">
+            <li style="text-align:left"> Select the size of the array that you would like to have created. The website
+                will generate a random array for you with numbers from
+                1 to 10000
+            </li>
+            <br>
+            <li> Click on the sorting function that you would like to execute on that array</li>
+            <br>
+            <li> Note the time to execute that it takes to execute the algorithm</li>
+            <br>
+            <li> Click on the "Unsort array" button if you would like to unsort the array</li>
+            <br>
+            <li> Try other sorting functions and see how the execution time is different for different sorting
+                algorithms
+            </li>
+            <br>
+            <li> The max size of the array is 1,000,000 and the timeout time is 1 minute</li>
+    </h4>
+    </ul>
+</div>
+<br>
+
+
+{% include 'table.html' %}
+
+{% endblock %}
