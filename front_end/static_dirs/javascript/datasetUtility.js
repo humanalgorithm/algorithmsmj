@@ -1,16 +1,3 @@
-function createArray() {
-    var node = document.getElementById('div2')
-
-    htmlContent = node.innerHTML
-
-    var temp = new Array();
-    temp = htmlContent.split(',');
-    for (a in temp) {
-        temp[a] = parseInt(temp[a], 10);
-    }
-
-    return temp
-}
 
 function resetarray() {
     var arraysize = 90;

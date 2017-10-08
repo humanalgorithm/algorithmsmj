@@ -1,8 +1,5 @@
 import json
-import time
-from django.views.decorators.csrf import ensure_csrf_cookie
-from multiprocessing import Queue, Process
-import threading
+from service.service import SortService
 from django.shortcuts import HttpResponse, render
 from dataset.dataset_builder import DatasetBuilder
 
@@ -61,8 +58,14 @@ def mergesort(request):
     return getsort(request,sortname)
 
 def bubblesort(request):
-    sortname = "bubblesort"
-    return getsort(request,sortname)
+    print request.POST
+    submitted_dataset = request.POST.getlist("dataset")
+    submitted_dataset = [int(i) for i in submitted_dataset]
+    print "submitted dataset", submitted_dataset
+    sort_result = SortService(submitted_dataset, "bubblesort").sort()
+    print "sort result", sort_result
+    return_json = {"sorted_dataset": sort_result, "time": "testing"}
+    return HttpResponse(json.dumps(return_json), content_type='application/json')
 
 def quicksort(request):
     sortname = "quicksort"
@@ -84,7 +87,6 @@ def get_random_dataset(request):
         return_msg = {"error": "Requested array size is too big"}
         status_code = 400
     return HttpResponse(json.dumps(return_msg), content_type='application/json', status=status_code)
-
 
 def quicksortabout(request):
     return render(request, "quicksortabout.html")
