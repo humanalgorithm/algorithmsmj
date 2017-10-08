@@ -1,18 +1,15 @@
+function createArray() {
+    var node = document.getElementById('div2')
 
+    htmlContent = node.innerHTML
 
-function createArray()
-{
-   var node = document.getElementById('div2')
+    var temp = new Array();
+    temp = htmlContent.split(',');
+    for (a in temp) {
+        temp[a] = parseInt(temp[a], 10);
+    }
 
-   htmlContent = node.innerHTML
-
-   var temp = new Array();
-   temp = htmlContent.split(',');
-   for (a in temp ) {
-   temp[a] = parseInt(temp[a], 10);
-   }
-
- return temp
+    return temp
 }
 
 function resetarray() {
@@ -37,48 +34,8 @@ function resetarray() {
 
 }
 
-function getrandom() {
-    var url = "/choosesort/";
-    var arraysize = 90;
-    $('#div3').text(document.getElementById('div2').innerHTML)
-    csrf_token = document.getElementById('token').getElementsByTagName("input")[0].value;
-    var arraysizeselect = document.getElementById('arraysize').value;
-    if (arraysizeselect == parseInt(arraysizeselect, 10) && arraysizeselect != 0) {
-        $("#time").text("");
-        $("#time").append("<img id='time' src='/static/css/ajax-loader.gif'/>");
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: {arraysize: arraysizeselect, csrfmiddlewaretoken: csrf_token},
-            success: function (data) {
 
-                $('#div2').text(data);
-                var shortarray = shortenArray(arraysize);
-                if (shortarray.length >= arraysize) {
-                    $('#div1').text(shortarray + "...");
-                }
-                else {
-                    $('#div1').text(shortarray);
-                }
-
-                $('#div1').css({"font-size": "20px"});
-                $('#time').text("Time to Execute\:");
-            },
-            error: function (data) {
-                //window.alert("in error");
-                $('#time').text("Array too big: please enter a shorter array size");
-                $('#time').css({"font-size": "20px"});
-            }
-        });
-
-        return false; // avoid to execute the actual submit of the form.
-    }
-    else {
-        $("#time").text("Please enter an integer for array size");
-    }
-}
-
-function shortenArray(arrayLength) { //window.alert("in shorten");
+function shortenArray(arrayLength) {
     var temp = new Array();
     htmlContent = document.getElementById('div2').innerHTML;
     var newarray = new Array();

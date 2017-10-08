@@ -3,9 +3,7 @@ from .sort import Sort
 
 class QuickSort(Sort):
     def run_sort(self, dataset):
-        mylist = dataset
-        self.quickSort(0, len(dataset) - 1)
-        return mylist
+        return self.quickSort(0, len(dataset) - 1)
 
     def quick_sort(self, lo, hi):
         hi = int(hi)
