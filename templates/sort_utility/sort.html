@@ -1,6 +1,4 @@
 {% extends 'component/base.html' %}
-
-
 {% block jumbotron %}
 {% include 'component/navbar.html' %}
 <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -16,14 +14,10 @@
         <p1><a class="btn btn-primary btn-lg" href="/learnmore" role="button">Learn more &raquo;</a></p1>
     </div>
 </div>
-
 {% include 'sortapp.html' %}
 {% include 'sortbuttontable.html' %}
-
 {% endblock %}
-
 {% block content %}
 {% include 'component/info_table.html' %}
 {% include 'component/contactForm.html'%}
-
 {% endblock %}

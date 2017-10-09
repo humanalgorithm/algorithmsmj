@@ -1,6 +1,4 @@
 {% extends 'component/base.html' %}
-
-
 {% block jumbotron %}
 {% include 'component/navbar.html' %}
 <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -16,9 +14,7 @@
 
     </div>
 </div>
-
 {% endblock %}
-
 {% block content %}
 <a name="sortutility"><h1 style="padding-top: 40px; margin-top: -40px;"></h1></a>
 {% include 'sort_utility/sortapp.html' %}
@@ -27,7 +23,6 @@
         {% include 'button/quicksortbutton.html' %}
     </tr>
 </table>
-
 <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-10">
@@ -35,6 +30,5 @@
     </div>
     <div class="col-md-1"></div>
 </div>
-
 {% include 'component/info_table.html' %}
 {% endblock %}
