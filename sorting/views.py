@@ -33,6 +33,7 @@ class SortView(View):
         thread_result = ThreadRunner(func=sort_func, data=dataset).run_in_thread()
         return {"sorted_dataset": thread_result.get_thread_result(), "time": thread_result.get_time_alotted()}
 
+
 def get_random_dataset(request):
     arraysize = request.POST.get("dataset_size")
     return_msg = DatasetBuilder().get_random_dataset(arraysize)
@@ -42,17 +43,17 @@ def get_random_dataset(request):
         status_code = 400
     return HttpResponse(json.dumps(return_msg), content_type='application/json', status=status_code)
 
-def quicksortabout(request):
-    return render(request, "quicksortabout.html")
 
-def mergesortabout(request):
-    return render(request, "mergesortabout.html")
-
-def bubblesortabout(request):
-    return render(request, "bubblesortabout.html")
-
-def insertionsortabout(request):
-    return render(request, "insertionsortabout.html")
-
-def selectionsortabout(request):
-    return render(request, "selectionsortabout.html")
+class AboutView(View):
+    def get(self, request, sortname):
+        template_map = {
+            "bubblesort": "sort_about/bubblesortabout.html",
+            "selectionsort": "sort_about/selectionsortabout.html",
+            "insertionsort": "sort_about/insertionsortabout.html",
+            "mergesort": "sort_about/mergesortabout.html",
+            "quicksort": "sort_about/quicksortabout.html"
+        }
+        template = template_map.get(sortname)
+        if not template:
+            return render(request, "page/404.html")
+        return render(request, template)

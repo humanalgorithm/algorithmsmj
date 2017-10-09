@@ -1,22 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'component/base.html' %}
 
 {% block jumbotron %}
-{% include 'navbar.html' %}
+{% include 'component/navbar.html' %}
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
         <div class="row">
             <div class="col-md-7"></div>
             <div class="col-md-8">
-                <p1> Selection sort is an O(n^2 ) algorithm that uses a nested loop to divide the array into a sorted
-                    portion and an unsorted portion. Selection sort looks for the lowest possible element in the
-                    unsorted array,
-                    adds it to the sorted array and then increases the sorted array size by 1. The sorted array will
-                    continue to grow while the unsorted portion of the array keeps going down by 1.
-
-                    <br><br> Every time selection sort goes through the inner array it only needs to make comparisons
-                    equal to the number of elements in the unsorted portion of the array.
-                </p1>
+                {% include 'text/selectionsort_description.html' %}
                 <p1><a class="btn btn-primary btn-lg" href="#sortutility" role="button">Use Selection Sort &raquo;</a>
                 </p1>
             </div>
@@ -29,79 +21,20 @@
 
 {% block content %}
 <a name="sortutility"><h1 style="padding-top: 40px; margin-top: -40px;"></h1></a>
-{% include 'sortutility.html' %}
-{% include 'selectionsortbutton.html' %}
+{% include 'sortapp.html' %}
+
+<table align="center">
+    <tr>
+        {% include 'button/selectionsortbutton.html' %}
+    </tr>
+</table>
+
+
 <div class="row">
     <div class="col-md-1"></div>
-
-    <div class="col-md-10">
-<pre> <code>
-    #with comments
-    def selectionSort(listIn):
-    #save the index element of the current lowest element, assume first element is the lowest to start
-    currentLowElementIndex = 0
-    #initialize inner loop counter variable
-    j=0
-    temp = 0
-    #mark for swap, initialize as false
-    swap = False
-
-    #outer loop from i=0 to i = length of list - 1
-    for i in range(0,len(listIn)):
-    #incrementt inner loop variable by 1
-    j=i+1
-    #mark i as the end of the sorted array portion and the current lowest element index
-    currentLowElementIndex = i
-    #reset swap to false before going into inner loop
-    swap = False
-
-    #go through inner loop from starting point i to ending point end of the loop
-    while j < len(listIn):
-    #if find an element in the unsorted array that is less than the currently marked lowest element in the unsorted
-    array then mark it for the swap
-    if listIn[j] < listIn[currentLowElementIndex]:
-    currentLowElementIndex = j
-    swap = True
-    j=j+1
-
-    #once the lowest element in the unsorted array has been found then do the swap on the lowest element in the unsorted
-    array and the first element of the unsorted array
-    #which would be the index of the sorted array + 1
-    if swap:
-    temp = listIn[i]
-    listIn[i+1] = listIn[currentLowElementIndex]
-    listIn[currentLowElementIndex] = temp
-    return listIn
-</code></pre>
-        <br>
-<pre> <code>
-    #without comments
-    def selectionSort(listIn):
-    currentLowElementIndex = 0
-    j=0
-    temp = 0
-    swap = False
-    for i in range(0,len(listIn)):
-    j=i+1
-    currentLowElementIndex = i
-    swap = False
-    while j < len(listIn):
-    if listIn[j] < listIn[currentLowElementIndex]:
-    currentLowElementIndex = j
-    swap = True
-    j=j+1
-
-    if swap:
-    temp = listIn[i]
-    listIn[i+1] = listIn[currentLowElementIndex]
-    listIn[currentLowElementIndex] = temp
-    return listIn
-</code></pre>
-    </div>
+     {% include 'text/selectionsort_code_snippet.html' %}
     <div class="col-md-1"></div>
 </div>
 }
-{% include 'table.html' %}
-
-
+{% include 'component/info_table.html' %}
 {% endblock %}

@@ -14,6 +14,8 @@ def signup(request):
 def thankyou(request):
     return render(request, "thankyou.html")
 
+
+
 class SignUpList(generics.ListCreateAPIView):
     queryset = SignUp.objects.all()
     serializer_class = SignUpSerializer

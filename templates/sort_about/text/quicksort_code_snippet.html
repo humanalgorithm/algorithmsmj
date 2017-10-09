@@ -1,0 +1,41 @@
+<div class="col-md-10">
+<pre> <code>
+class QuickSort(object):
+    def quickSort(self, lo, hi, array):
+        if (hi - lo) < 1:
+            return
+
+        j = self.partition(lo, hi, array)
+        self.quickSort(lo, j, array)
+        self.quickSort(j + 1, hi, array)
+
+        return array
+
+    def partition(self, lo, hi, array):
+        i = lo - 1
+        j = hi + 1
+        pivot = lo
+        exit = False
+
+        while exit == False:
+            while i <= hi:
+                i += 1
+                if array[i] >= array[pivot]:
+                    break
+
+            while j >= lo:
+                j -= 1
+                if array[j] <= array[pivot]:
+                    if j <= i:
+                        exit = True
+                        break
+                    if i == pivot:
+                        pivot = j
+                    temp = array[i]
+                    array[i] = array[j]
+                    array[j] = temp
+                    break
+        return j
+</code></pre>
+
+</div>
