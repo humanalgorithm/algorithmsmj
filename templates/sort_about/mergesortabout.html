@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'component/base.html' %}
 
 
 {% block jumbotron %}
-{% include 'navbar.html' %}
+{% include 'component/navbar.html' %}
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
@@ -20,18 +20,21 @@
 {% endblock %}
 {% block content %}
 <a name="sortutility"><h1 style="padding-top: 40px; margin-top: -40px;"></h1></a>
-{% include 'sortutility.html' %}
-{% include 'mergesortbutton.html' %}
+{% include 'sort_utility/sortapp.html' %}
+<table align="center">
+    <tr>
+{% include 'button/mergesortbutton.html' %}
+    </tr>
+</table>
+
 <div class="row">
     <div class="col-md-1"></div>
 
     <div class="col-md-10">
-    {% include 'text/mergesort_description.html' %}
+    {% include 'text/mergesort_code_snippet.html' %}
     </div>
     <div class="col-md-1"></div>
 </div>
 
-{% include 'table.html' %}
-
-
+{% include 'component/info_table.html' %}
 {% endblock %}

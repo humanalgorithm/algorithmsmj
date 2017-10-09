@@ -23,7 +23,7 @@ var ExecuteSortService = {
         return return_dataset
     },
     _makeAjaxRequest: function (sort_name, current_dataset) {
-        var url = "get_sort_result/";
+        var url = "/get_sort_result/";
         csrf_token  = this._getCsrfToken()
         self = this
         $.ajax({
@@ -52,18 +52,19 @@ var ExecuteSortService = {
 
         return false;
     },
-    _setTimeoutError: function (response_content) {
-        $('#time').text("There was a timeout error after " + response_content.time + " seconds. Please try a shorter array");
+    _setTimeoutError: function (response_data) {
+        $('#time').text("There was a timeout error after " + response_data.time + " seconds. Please try a shorter array");
         $('#time').css({"font-size": "20px"});
     },
     _setTooLargeDatasetError: function (response_data) {
-        error_msg = JSON.parse(response_data.responseText).error
+        //error_msg = JSON.parse(response_data.responseText).error
+        error_msg = response_data.error
         $('#time').text(error_msg);
         $('#time').css({"font-size": "20px"});
     },
 
-    _setSortedResult: function (response_content) {
-        $('#div2').text(response_content.sorted_dataset);
+    _setSortedResult: function (response_data) {
+        $('#div2').text(response_data.sorted_dataset);
         var shortarray = shortenArray(arraysize);
         if (shortarray.length >= arraysize) {
             $('#div1').text(shortarray + "...");
@@ -73,7 +74,7 @@ var ExecuteSortService = {
         }
         $('#div1').css({"font-size": "20px"});
 
-        $('#time').text("Time to execute: " + response_content.time);
+        $('#time').text("Time to execute: " + response_data.time);
         $('#time').css({"font-size": "20px"});
     }
 }

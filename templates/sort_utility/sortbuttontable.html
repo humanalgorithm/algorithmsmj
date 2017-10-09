@@ -1,23 +1,9 @@
 <table align="center">
     <tr>
-        <td>
-            <input type="button" class='btn btn-primary' onclick="ExecuteSortService.executeSort('quicksort')" value="Quick Sort">
-        </td>
-
-        <td>
-            <input type="button" class='btn btn-primary ' onclick="ExecuteSortService.executeSort('mergesort')" value="Merge Sort">
-        </td>
-
-        <td>
-            <input type="button" class='btn btn-primary' onclick="ExecuteSortService.executeSort('bubblesort')" value="Bubble Sort">
-        </td>
-        <td>
-            <input type="button" class='btn btn-primary' onclick="ExecuteSortService.executeSort('selectionsort')" value="Selection Sort">
-        </td>
-        <td>
-            <input type="button" class='btn btn-primary' onclick="ExecuteSortService.executeSort('insertionsort')" value="Insertion Sort">
-        </td>
+        {% include 'button/mergesortbutton.html' %}
+        {% include 'button/quicksortbutton.html' %}
+        {% include 'button/bubblesortbutton.html' %}
+        {% include 'button/insertionsortbutton.html' %}
+        {% include 'button/selectionsortbutton.html' %}
     </tr>
-
-
 </table>

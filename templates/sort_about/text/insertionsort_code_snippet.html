@@ -1,30 +1,15 @@
-<pre> <code>
-    #with comments
-    def insertionSort (listIn):
-    # loop through the array starting at position 1 (2nd spot in array) to length of the array -1
-    # (in range function stops before 2nd parameter)
-    #outer loop
-    for i in range(1,len(listIn)):
-    #set inner loop to match start of outer loop
-    j=i
-    #go backwards through array swap lower elements continously to the beginning of the array
-    while j >=1 and listIn[j] < listIn[j-1]:
-    temp = listIn[j-1]
-    listIn[j-1] = listIn[j]
-    listIn[j] = temp
-    j=j-1
-    return listIn
-</code></pre>
-<br>
-<pre> <code>
-    #without comments
-    def insertionSort (listIn):
-    for i in range(1,len(listIn)):
-    j=i
-    while j >=1 and listIn[j] < listIn[j-1]:
-    temp = listIn[j-1]
-    listIn[j-1] = listIn[j]
-    listIn[j] = temp
-    j=j-1
-    return listIn
-</code></pre>
+<div class="col-md-10">
+
+    <pre> <code>
+class InsertionSort(object):
+    def insertion_sort(self, dataset):
+        for sorted_index in range(1, len(dataset)):
+            j = sorted_index
+            while j >= 1 and dataset[j] < dataset[j - 1]:
+                temp = dataset[j - 1]
+                dataset[j - 1] = dataset[j]
+                dataset[j] = temp
+                j = j - 1
+        return dataset
+    </code> </pre>
+</div>
