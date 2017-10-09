@@ -1,6 +1,6 @@
 import json
 from service.service import SortService
-from django.shortcuts import HttpResponse, render
+from django.shortcuts import render
 from dataset.dataset_builder import DatasetBuilder
 from timed_thread.thread_runner import ThreadRunner
 
@@ -8,13 +8,25 @@ from django.http import HttpResponse
 from django.views.generic.base import View
 
 
+class AboutView(View):
+    def get(self, request, sortname):
+        template_map = {
+            "bubblesort": "sort_about/bubblesortabout.html",
+            "selectionsort": "sort_about/selectionsortabout.html",
+            "insertionsort": "sort_about/insertionsortabout.html",
+            "mergesort": "sort_about/mergesortabout.html",
+            "quicksort": "sort_about/quicksortabout.html"
+        }
+        template = template_map.get(sortname)
+        if not template:
+            return render(request, "page/404.html")
+        return render(request, template)
+
 class SortView(View):
     def post(self, request):
         dataset = self._parse_dataset(request.POST)
         sort_name = request.POST.get('sort_name')
-
         if not dataset or not sort_name:
-            status_code = 400
             return_json = {"error": "Invalid dataset was submitted"}
             return HttpResponse(json.dumps(return_json), content_type="application/json", status=400)
 
@@ -33,27 +45,16 @@ class SortView(View):
         thread_result = ThreadRunner(func=sort_func, data=dataset).run_in_thread()
         return {"sorted_dataset": thread_result.get_thread_result(), "time": thread_result.get_time_alotted()}
 
+class DatasetView(View):
+    def post(self, request):
+        status_code = 200
+        return_msg = self._get_random_dataset(request)
+        if return_msg == -1:
+            return_msg = {"error": "Requested array size is too big"}
+            status_code = 400
+        return HttpResponse(json.dumps(return_msg), content_type='application/json', status=status_code)
 
-def get_random_dataset(request):
-    arraysize = request.POST.get("dataset_size")
-    return_msg = DatasetBuilder().get_random_dataset(arraysize)
-    status_code = 200
-    if return_msg == -1:
-        return_msg = {"error": "Requested array size is too big"}
-        status_code = 400
-    return HttpResponse(json.dumps(return_msg), content_type='application/json', status=status_code)
-
-
-class AboutView(View):
-    def get(self, request, sortname):
-        template_map = {
-            "bubblesort": "sort_about/bubblesortabout.html",
-            "selectionsort": "sort_about/selectionsortabout.html",
-            "insertionsort": "sort_about/insertionsortabout.html",
-            "mergesort": "sort_about/mergesortabout.html",
-            "quicksort": "sort_about/quicksortabout.html"
-        }
-        template = template_map.get(sortname)
-        if not template:
-            return render(request, "page/404.html")
-        return render(request, template)
+    def _get_random_dataset(self, request):
+        arraysize = request.POST.get("dataset_size")
+        return_msg = DatasetBuilder().get_random_dataset(arraysize)
+        return return_msg

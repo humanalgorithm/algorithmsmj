@@ -1,6 +1,4 @@
 {% extends 'base.html' %}
-
-
 {% block jumbotron %}
 {% include 'navbar.html' %}
     <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -18,13 +16,10 @@
 
       </div>
     </div>
-
 {% endblock %}
-
 {% block content %}
 <div class = 'center-block centerblueborder regfont' >
  {%include 'contactForm.html' %}
 </div>
 {% include 'table.html' %}
-
 {% endblock %}
