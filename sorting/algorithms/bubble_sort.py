@@ -1,10 +1,7 @@
 from .sort import Sort
 
 class BubbleSort(Sort):
-    def run_sort(self, dataset):
-        return self.bubble_sort(dataset)
-
-    def bubble_sort(self, dataset):
+    def sort(self, dataset):
         i = 0
         numPasses = len(dataset)
         sorted = False

@@ -1,11 +1,9 @@
+from .sort import Sort
 
-class MergeSort(object):
-    def run_sort(self, dataset):
-        return self.merge_sort(dataset)
-
-    def merge_sort(self, dataset):
-        left_array_pass = []
-        right_array_pass = []
+class MergeSort(Sort):
+    def sort(self, dataset):
+        left_array = []
+        right_array = []
 
         lo = 0
         hi = len(dataset) - 1
@@ -14,15 +12,15 @@ class MergeSort(object):
         r = mid + 1
 
         while i <= mid:
-            left_array_pass.append(dataset[i])
+            left_array.append(dataset[i])
             i = i + 1
         while r <= hi:
-            right_array_pass.append(dataset[r])
+            right_array.append(dataset[r])
             r = r + 1
 
         if (len(dataset)) > 1:
-            left_array = self.merge_sort(left_array_pass)
-            right_array = self.merge_sort(right_array_pass)
+            left_array = self.sort(left_array)
+            right_array = self.sort(right_array)
             dataset_merged = self.merge_sets(left_array, right_array)
             return dataset_merged
         else:

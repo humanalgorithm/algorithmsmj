@@ -32,20 +32,20 @@ var GetRandomDatasetService = {
             type: "POST",
             url: url,
             data: {dataset_size: arraysizeselect, csrfmiddlewaretoken: csrf_token},
-            success: function (data) {
-                self._setDatasetText(data, arraysizeselect)
+            success: function (response_data) {
+                self._setDatasetText(response_data, arraysizeselect)
                 self._setSuccessMsg()
             },
-            error: function (data) {
-                self._setErrorMsg(data)
+            error: function (response_data) {
+                self._setErrorMsg(response_data)
             }
         });
 
         return false;
     },
-    _setDatasetText: function (data, arraysize) {
+    _setDatasetText: function (response_data, arraysize) {
         div_id = '#div2'
-        $(div_id).text(data);
+        $(div_id).text(response_data);
         var shortarray = shortenArray(arraysize);
         if (shortarray.length >= arraysize) {
             $('#div1').text(shortarray + "...");
@@ -58,8 +58,8 @@ var GetRandomDatasetService = {
         $('#div1').css({"font-size": "20px"});
         $('#time').text("Success");
     },
-    _setErrorMsg: function (data) {
-        error_msg = JSON.parse(data.responseText).error
+    _setErrorMsg: function (response_data) {
+        error_msg = JSON.parse(response_data.responseText).error
         $('#time').text(error_msg);
         $('#time').css({"font-size": "20px"});
     },

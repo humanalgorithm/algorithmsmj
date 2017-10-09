@@ -1,10 +1,7 @@
 from .sort import Sort
 
 class SelectionSort(Sort):
-    def run_sort(self, dataset):
-        return self.selectionSort(dataset)
-
-    def selection_sort(self, dataset):
+    def sort(self, dataset):
         for i in range(0, len(dataset)):
             j=i+1
             currentLowElementIndex = i
