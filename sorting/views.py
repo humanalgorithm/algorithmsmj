@@ -2,82 +2,36 @@ import json
 from service.service import SortService
 from django.shortcuts import HttpResponse, render
 from dataset.dataset_builder import DatasetBuilder
+from timed_thread.thread_runner import ThreadRunner
+
+from django.http import HttpResponse
+from django.views.generic.base import View
 
 
-def getsort(request, sortname):
-    pass
-    '''
-    input = request.POST["array"]
-    decoded = json.loads(input)
-    if decoded[0] == None:
-        return HttpResponse(status=500, content_type='application/json')
+class SortView(View):
+    def post(self, request):
+        dataset = self._parse_dataset(request.POST)
+        sort_name = request.POST.get('sort_name')
 
-    global timeout
-    que = Queue()
+        if not dataset or not sort_name:
+            status_code = 400
+            return_json = {"error": "Invalid dataset was submitted"}
+            return HttpResponse(json.dumps(return_json), content_type="application/json", status=400)
 
-    if sortname == "mergesort":
-        thr = threading.Thread(target = lambda q, arg : q.put(sort.startMergeSort(decoded, timeout)), args = (que, 2))
-    elif sortname == "quicksort":
-        thr = threading.Thread(target = lambda q, arg : q.put(sort.quickSortStart(decoded,timeout)), args = (que, 2))
-    elif sortname =="insertionsort":
-        thr = threading.Thread(target = lambda q, arg : q.put(sort.startInsertionSort(decoded, timeout)), args = (que, 2))
-    elif sortname == "bubblesort":
-         thr = threading.Thread(target = lambda q, arg : q.put(sort.startBubbleSort(decoded, timeout)), args = (que, 2))
-    elif sortname == "selectionsort":
-         thr = threading.Thread(target = lambda q, arg : q.put(sort.startSelectionSort(decoded, timeout)), args = (que, 2))
+        return_json = self._get_sort_result(dataset, sort_name)
+        return HttpResponse(json.dumps(return_json), content_type="application/json", status=200)
 
-    thr.daemon = True
-    time_start = time.clock()
-    try:
-        thr.start()
-        thr.join(timeout)
-    except:
-        return HttpResponse(status=500, content_type='application/json')
-    if thr.is_alive():
-        thr._Thread__stop()
-        print "thread weas killed!"
-        data = json.dumps({
-        "array": decoded,
-        "time": timeout,
-        "error": "timeout"
-          })
-        return HttpResponse(json.dumps(data), content_type='application/json')
-    else:
-        time_end = time.clock()
-        elapsed_time = time_end-time_start
-        returnarr = que.get()
-        data = json.dumps({
-        "array": returnarr,
-        "time": elapsed_time
-          })
-        return HttpResponse(json.dumps(data), content_type='application/json')
-    '''
+    def _parse_dataset(self, post):
+        try:
+            submitted_dataset = [int(i) for i in post.getlist("dataset")]
+            return submitted_dataset
+        except:
+            return None
 
-def mergesort(request):
-    sortname = "mergesort"
-    return getsort(request,sortname)
-
-def bubblesort(request):
-    print request.POST
-    submitted_dataset = request.POST.getlist("dataset")
-    submitted_dataset = [int(i) for i in submitted_dataset]
-    print "submitted dataset", submitted_dataset
-    sort_result = SortService(submitted_dataset, "bubblesort").sort()
-    print "sort result", sort_result
-    return_json = {"sorted_dataset": sort_result, "time": "testing"}
-    return HttpResponse(json.dumps(return_json), content_type='application/json')
-
-def quicksort(request):
-    sortname = "quicksort"
-    return getsort(request,sortname)
-
-def selectionsort(request):
-    sortname = "selectionsort"
-    return getsort(request,sortname)
-
-def insertionsort(request):
-    sortname = "insertionsort"
-    return getsort(request,sortname)
+    def _get_sort_result(self, dataset, sort_name):
+        sort_func = SortService(sort_method=sort_name).get_sort_func()
+        thread_result = ThreadRunner(func=sort_func, data=dataset).run_in_thread()
+        return {"sorted_dataset": thread_result.get_thread_result(), "time": thread_result.get_time_alotted()}
 
 def get_random_dataset(request):
     arraysize = request.POST.get("dataset_size")

@@ -23,7 +23,7 @@ var ExecuteSortService = {
         return return_dataset
     },
     _makeAjaxRequest: function (sort_name, current_dataset) {
-        var url = sort_name + "/";
+        var url = "get_sort_result/";
         csrf_token  = this._getCsrfToken()
         self = this
         $.ajax({
@@ -33,7 +33,8 @@ var ExecuteSortService = {
             traditional: true,
             data: {
                 dataset: current_dataset,
-                csrfmiddlewaretoken: csrf_token
+                csrfmiddlewaretoken: csrf_token,
+                sort_name: sort_name
             },
             success: function(response_data) {
                 //var response_content = JSON.parse(response_data);
@@ -44,8 +45,8 @@ var ExecuteSortService = {
                     self._setTimeoutError(response_data)
                 }
             },
-            error: function (data) {
-                self._setTooLargeDatasetError()
+            error: function (response_data) {
+                self._setTooLargeDatasetError(response_data)
             }
         });
 
@@ -55,8 +56,9 @@ var ExecuteSortService = {
         $('#time').text("There was a timeout error after " + response_content.time + " seconds. Please try a shorter array");
         $('#time').css({"font-size": "20px"});
     },
-    _setTooLargeDatasetError: function () {
-        $('#time').text("Array too large, please enter a shorter array");
+    _setTooLargeDatasetError: function (response_data) {
+        error_msg = JSON.parse(response_data.responseText).error
+        $('#time').text(error_msg);
         $('#time').css({"font-size": "20px"});
     },
 
@@ -71,8 +73,7 @@ var ExecuteSortService = {
         }
         $('#div1').css({"font-size": "20px"});
 
-
-        $('#time').text("Time to execute: " + time);
+        $('#time').text("Time to execute: " + response_content.time);
         $('#time').css({"font-size": "20px"});
     }
 }

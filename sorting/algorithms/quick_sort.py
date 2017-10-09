@@ -1,19 +1,16 @@
-from .sort import Sort
+from .sort import SortQuicksort
 
 
-class QuickSort(Sort):
-    def run_sort(self, dataset):
-        return self.quickSort(0, len(dataset) - 1)
-
-    def quick_sort(self, lo, hi):
-        hi = int(hi)
-        lo = int(lo)
+class QuickSort(SortQuicksort):
+    def sort(self, lo, hi, dataset):
         if (hi - lo) < 1:
             return
 
-        j = self.partition(lo, hi)
-        self.quickSort(lo, j)
-        self.quickSort(j + 1, hi)
+        j = self.partition(lo, hi, dataset)
+        self.sort(lo, j, dataset)
+        self.sort(j + 1, hi, dataset)
+
+        return dataset
 
     def partition(self, lo, hi, dataset):
         i = lo - 1
@@ -23,18 +20,19 @@ class QuickSort(Sort):
 
         while exit == False:
             while i <= hi:
-                i = i + 1
-                if mylist[i] >= mylist[pivot]:
+                i += 1
+                if dataset[i] >= dataset[pivot]:
                     break
+
             while j >= lo:
-                j = j - 1
+                j -= 1
                 if dataset[j] <= dataset[pivot]:
                     if j <= i:
                         exit = True
                         break
                     if i == pivot:
                         pivot = j
-                    temp = mylist[i]
+                    temp = dataset[i]
                     dataset[i] = dataset[j]
                     dataset[j] = temp
                     break
