@@ -1,6 +1,5 @@
 var ExecuteSortService = {
     executeSort: function (sort_name) {
-        $('#div3').text(document.getElementById('div2').innerHTML);
         var current_dataset = this._getCurrentDataset();
         this._setLoadingImg()
         this._makeAjaxRequest(sort_name, current_dataset)
@@ -9,14 +8,14 @@ var ExecuteSortService = {
         return document.getElementById('token').getElementsByTagName("input")[0].value
     },
     _setLoadingImg: function () {
-        $("#time").text("");
-        $("#time").append("<img id='time' src='/static/css/ajax-loader.gif'/>");
+        $("#time_display").text("");
+        $("#time_display").append("<img id='time' src='/static/css/ajax-loader.gif'/>");
     },
     _getCurrentDataset: function () {
-        var node = document.getElementById('div2')
-        htmlContent = node.innerHTML
+        var dataset_submit_element = document.getElementById('dataset_submit')
+        html_content = dataset_submit_element.innerHTML
         var return_dataset = []
-        html_elements = htmlContent.split(',');
+        html_elements = html_content.split(',');
         for (var i = 0; i < html_elements.length; i++) {
             return_dataset.push(parseInt(html_elements[i], 10));
         }
@@ -37,7 +36,6 @@ var ExecuteSortService = {
                 sort_name: sort_name
             },
             success: function(response_data) {
-                //var response_content = JSON.parse(response_data);
                 if (response_data.error != "timeout") {
                     self._setSortedResult(response_data)
                 }
@@ -57,25 +55,19 @@ var ExecuteSortService = {
         $('#time').css({"font-size": "20px"});
     },
     _setTooLargeDatasetError: function (response_data) {
-        //error_msg = JSON.parse(response_data.responseText).error
         error_msg = response_data.error
-        $('#time').text(error_msg);
-        $('#time').css({"font-size": "20px"});
+        $('#time_display').text(error_msg);
+        $('#time_display').css({"font-size": "20px"});
     },
-
     _setSortedResult: function (response_data) {
-        $('#div2').text(response_data.sorted_dataset);
-        var shortarray = shortenArray(arraysize);
-        if (shortarray.length >= arraysize) {
-            $('#div1').text(shortarray + "...");
-        }
-        else {
-            $('#div1').text(shortarray);
-        }
-        $('#div1').css({"font-size": "20px"});
+        div_id_from = '#dataset_received'
+        div_id_to = '#dataset_display'
+        $(div_id_from).text(response_data.sorted_dataset);
+        setDatasetDisplay(div_id_from, div_id_to)
 
-        $('#time').text("Time to execute: " + response_data.time);
-        $('#time').css({"font-size": "20px"});
+        $('#dataset_display').css({"font-size": "20px"});
+        $('#time_display').text("Time to execute: " + response_data.time);
+        $('#time_display').css({"font-size": "20px"});
     }
 }
 

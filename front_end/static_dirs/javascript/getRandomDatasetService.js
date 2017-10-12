@@ -1,39 +1,34 @@
 var GetRandomDatasetService = {
     getRandom: function () {
-        $('#div3').text(document.getElementById('div2').innerHTML)
         csrf_token = this._getCsrfToken()
-        var dataset_size = document.getElementById('arraysize').value;
-        if (this._validInt(dataset_size)) {
+        var user_array_size = document.getElementById('user_array_size').value;
+        if (this._validInt(user_array_size)) {
             this._setLoadingImg()
-            this._ajaxRequestRandomDataset(dataset_size, csrf_token)
+            this._ajaxRequestRandomDataset(user_array_size, csrf_token)
         }
         else {
             this._setInvalidInputMsg()
         }
     },
-
     _setLoadingImg: function () {
-        $("#time").text("");
-        $("#time").append("<img id='time' src='/static/css/ajax-loader.gif'/>");
+        $("#time_display").text("");
+        $("#time_display").append("<img id='time' src='/static/css/ajax-loader.gif'/>");
     },
-
     _getCsrfToken: function () {
         return document.getElementById('token').getElementsByTagName("input")[0].value
     },
-
     _validInt: function (dataset_size) {
         return (dataset_size == parseInt(dataset_size, 10) && dataset_size != 0)
     },
-
-    _ajaxRequestRandomDataset: function (arraysizeselect, csrf_token) {
+    _ajaxRequestRandomDataset: function (user_array_size, csrf_token) {
         var url = "/get_random_dataset/";
         var self = this
         $.ajax({
             type: "POST",
             url: url,
-            data: {dataset_size: arraysizeselect, csrfmiddlewaretoken: csrf_token},
+            data: {dataset_size: user_array_size, csrfmiddlewaretoken: csrf_token},
             success: function (response_data) {
-                self._setDatasetText(response_data, arraysizeselect)
+                self._setRandomDataResult(response_data)
                 self._setSuccessMsg()
             },
             error: function (response_data) {
@@ -43,27 +38,22 @@ var GetRandomDatasetService = {
 
         return false;
     },
-    _setDatasetText: function (response_data, arraysize) {
-        div_id = '#div2'
-        $(div_id).text(response_data);
-        var shortarray = shortenArray(arraysize);
-        if (shortarray.length >= arraysize) {
-            $('#div1').text(shortarray + "...");
-        }
-        else {
-            $('#div1').text(shortarray);
-        }
+    _setRandomDataResult: function(response_data) {
+        div_id_from = '#dataset_submit'
+        div_id_to = '#dataset_display'
+        $(div_id_from).text(response_data);
+        setDatasetDisplay(div_id_from, div_id_to)
     },
     _setSuccessMsg: function () {
-        $('#div1').css({"font-size": "20px"});
-        $('#time').text("Success");
+        $('#dataset_display').css({"font-size": "20px"});
+        $('#time_display').text("Success");
     },
     _setErrorMsg: function (response_data) {
         error_msg = JSON.parse(response_data.responseText).error
-        $('#time').text(error_msg);
-        $('#time').css({"font-size": "20px"});
+        $('#time_display').text(error_msg);
+        $('#time_display').css({"font-size": "20px"});
     },
     _setInvalidInputMsg: function () {
-        $("#time").text("Please enter an integer for array size");
+        $("#time_display").text("Please enter an integer for array size");
     }
 }
