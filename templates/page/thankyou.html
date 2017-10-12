@@ -1,8 +1,34 @@
-{% extends 'base.html' %}
-{% block content %}
-{% include 'navbar.html' %}
-<div class='col-sm-12' style='text-align-center;'>
-    <h4> Thank you for making contact! </h4>
-    <p1><a class="btn btn-primary btn-lg" href="/" role="button">Back to Home &raquo;</a></p1>
+{% extends 'component/base.html' %}
+{% block jumbotron %}
+{% include 'component/navbar.html' %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-5">
+                {% if messages %}
+                <div class='row'>
+                    <div class='col-sm-12 col-sm-offset-3'>
+                        {% for message in messages %}
+                          {% if message.tags == "success"%}
+                            <p class="alert alert-success"> {{message}}</p>
+                          {% else %}
+                            <p class="alert alert-danger">{{message}}</p>
+                          {% endif %}
+                          </p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
+{% block content %}
+<p align="center"><a class="btn btn-primary btn-lg" href="/" role="button">Back to Home &raquo;</a></p>
+{% include 'component/info_table.html' %}
+{% endblock %}
+
+
