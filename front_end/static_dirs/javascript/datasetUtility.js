@@ -1,24 +1,9 @@
 
-function resetarray() {
-    var arraysize = 90;
-    var lastarray = document.getElementById('div3').innerHTML
-
-    if (lastarray.length == 0) {
-    }
-    else {
-        $('#div2').text(lastarray);
-        var shortarray = shortenArray(arraysize)
-
-        if (shortarray.length >= arraysize) {
-            $('#div1').text(shortarray + "...");
-        }
-        else {
-            $('#div1').text(shortarray);
-        }
-
-        $('#time').text("Time to Execute\:");
-    }
-
+function resetDataset() {
+    div_id_from = "#dataset_submit"
+    div_id_to = "#dataset_display"
+    setDatasetDisplay(div_id_from, div_id_to)
+    $('#time_display').text("Time to Execute\:");
 }
 
 function setDatasetDisplay(div_id_from, div_id_to) {
