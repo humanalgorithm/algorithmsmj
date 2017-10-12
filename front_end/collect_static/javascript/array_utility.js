@@ -78,9 +78,9 @@ function getrandomArray() {
     }
 }
 
-function shortenArray(arrayLength) { //window.alert("in shorten");
+function shortenArrayDisplay(arrayLength) { //window.alert("in shorten");
     var temp = new Array();
-    htmlContent = document.getElementById('div2').innerHTML;
+    htmlContent = document.getElementById('dataset_display').innerHTML;
     var newarray = new Array();
 
     temp = htmlContent.split(',');

@@ -21,20 +21,17 @@ function resetarray() {
 
 }
 
+function setDatasetDisplay(div_id_from, div_id_to) {
+    max_array_display_size = 150
 
-function shortenArray(arrayLength) {
-    var temp = new Array();
-    htmlContent = document.getElementById('div2').innerHTML;
-    var newarray = new Array();
-
-    temp = htmlContent.split(',');
-    var i = 0;
-
-    for (a in temp) {
-        newarray[a] = parseInt(temp[a], 10);
-        if (a >= arrayLength - 1) {
-            break;
-        }
+    from_div_text = $(div_id_from).text()
+    from_div_array = from_div_text.split(',');
+    from_div_array_length = from_div_array.length
+    if (from_div_array_length > max_array_display_size) {
+        truncated_array = from_div_array.slice(0, max_array_display_size)
+        $(div_id_to).text(truncated_array + "...");
     }
-    return newarray;
+    else {
+        $(div_id_to).text(from_div_text)
+    }
 }
