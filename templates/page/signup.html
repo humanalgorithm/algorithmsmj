@@ -1,5 +1,4 @@
-{% extends 'base.html' %}
-
+{% extends 'component/base.html' %}
 {% block jumbotron %}
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
@@ -17,6 +16,6 @@
 
 {% endblock %}
 {% block content %}
-{ %include 'sortutility.html' %}
-{% include 'table.html' %}
+{ %include 'sortapp.html' %}
+{% include 'component/info_table.html' %}
 {% endblock %}

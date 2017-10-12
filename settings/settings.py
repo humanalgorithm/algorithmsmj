@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -127,21 +126,6 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000000
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
-#Template location
-
-'''
-TEMPLATE_DIRS = (
-                 os.path.join(BASE_DIR, "templates"),
-                 os.path.join(BASE_DIR, "templates", "button"),
-                 os.path.join(BASE_DIR, "templates", "sort_utility"),
-                 os.path.join(BASE_DIR, "templates", "sort_about"),
-                 os.path.join(BASE_DIR, "templates", "page")
-                 ),
-
-print TEMPLATE_DIRS
-'''
-
 
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, "front_end", "collect_static")

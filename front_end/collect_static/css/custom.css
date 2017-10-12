@@ -1,6 +1,6 @@
 .jumbotron {
 background-color: #17D1FF;
-background-image: url("/static/css/matrix.jpg");
+background-image: url("../../static_dirs/img/matrix.jpg");
 }
 
 .center-block.centerblueborder.regfont{
@@ -37,11 +37,12 @@ border-width: 7px;
 }
 
 
-#menuleftcontent{
+#menuleftcontent {
     float: right;
     width: 200px;
     margin-right: -200px;
     background-color: #CCCCCC;
+}
 
  .row2 {
   margin-right: -50px;

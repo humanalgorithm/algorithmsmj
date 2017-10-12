@@ -12,7 +12,7 @@ var GetRandomDatasetService = {
     },
     _setLoadingImg: function () {
         $("#time_display").text("");
-        $("#time_display").append("<img id='time' src='/static/css/ajax-loader.gif'/>");
+        $("#time_display").append("<img id='time' src='/static/img/ajax-loader.gif'/>");
     },
     _getCsrfToken: function () {
         return document.getElementById('token').getElementsByTagName("input")[0].value
