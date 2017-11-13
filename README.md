@@ -12,7 +12,7 @@ A user will enter an integer value for the size of the array, click on "Get rand
 
 ## How to run this locally?
 1. git clone the repository
-2. Set up a virtualenv on your machien using "virtualenv <name for virtualenv folder> --no-site-packages"
+2. Set up a virtualenv on your machine using "virtualenv <name for virtualenv folder> --no-site-packages"
 3. Install the required packages with "pip install -r requirements.txt" Requirements.txt is in the /requirements folder
 4. Run Django server with "python manage.py runserver" You can make this work for external connections with "python manage.py runserver 0.0.0.0:8000"
 5. Browse the website in your browser
