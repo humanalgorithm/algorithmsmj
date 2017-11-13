@@ -104,31 +104,20 @@
 
         <p> The <b>urls.py</b> file uses regular expressions to determine where a request should be routed. Every time a
             user sends a request to Django it will look at the urls.py and see
-            if there are any matching patterns to route the request. Here is a sample of the urls.py for this
+            if there are any matching patterns to route the request. Here is a sample of the urls.py from sorting for this
             application:
         </p>
         <pre><code>
-          from django.conf import settings
-          from django.conf.urls.static import static
+        from . import views
 
-          urlpatterns = patterns('',
+        urlpatterns = [url(r'^$', views.home, name="home"),
+                       url(r'^learnmore/$', views.learnmore, name="learnmore"),
+                       url(r'^about-us/$', views.aboutus, name="aboutus"),
+                       url(r'^pythonabout/$', views.pythonabout, name="pythonabout"),
+                       url(r'^.*/$', views.fourzerofour, name="fourzerofour"),
+                       ]
 
-          url(r'^$', 'signups.views.home', name='home'),
-          url(r'^thank-you/$', 'signups.views.thankyou', name='thankyou'),
-          url(r'^about-us/$', 'signups.views.aboutus', name='aboutus'),
-          url(r'^admin/', include(admin.site.urls)),
-          url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-          url(r'^signups/', include('signups.urls')),
-          url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-          url(r'^learnmore/$', 'signups.views.learnmore', name='learnmore'),
-          url(r'^quicksortabout/$', 'signups.views.quicksortabout', name='quicksortabout'),
-          url(r'^mergesortabout/$', 'signups.views.mergesortabout', name='mergesortabout'),
-          url(r'^bubblesortabout/$', 'signups.views.bubblesortabout', name='bubblesortabout'),
-          url(r'^insertionsortabout/$', 'signups.views.insertionsortabout', name='insertionsortabout'),
-          url(r'^selectionsortabout/$', 'signups.views.selectionsortabout', name='selectionsortabout'),
-          url(r'^pythonabout/$', 'signups.views.pythonabout', name='pythonabout'),
-          url(r'^.*/$', 'signups.views.fourzerofour', name='fourzerofour')
-          )
+
       </code> </pre>
 
         <p>The <b>models.py</b> is where you store information about your models(data). Here you can define the
@@ -136,15 +125,15 @@
             Here is an exceprt from the models.py for this website that defines the signups from the signup form on the
             main page: </p>
         <pre><code>
-           class SignUp(models.Model):
-           first_name = models.CharField(max_length=120, null=True, blank=True)
-           last_name = models.CharField(max_length=120, null=True, blank=True )
-           email=models.EmailField()
-           timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-           updated=models.DateTimeField(auto_now_add=False, auto_now=True)
+        class SignUp(models.Model):
+            first_name = models.CharField(max_length=120, null=True, blank=True)
+            last_name = models.CharField(max_length=120, null=True, blank=True)
+            email = models.EmailField()
+            timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+            updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
-           def __unicode__(self):
-           return self.email
+            def __unicode__(self):
+                return self.email
 
        </code></pre>
 
@@ -154,15 +143,12 @@
         functions on the views.py will match what is called in the urls.py file. For example in the urls.py we called
         the /learnmore page as follows:
     </p>
-    <pre><code> url(r'^learnmore/$', 'signups.views.learnmore', name='learnmore')</code></pre>
+    <pre><code> url(r'^learnmore/$', views.learnmore, name="learnmore")</code></pre>
     Now the corresponding code in the views.py file be as follows to catch the function:
     <pre> <code>
-             def learnmore(request):
-
-             return render_to_response("learnmore.html",
-             locals(),
-             context_instance =RequestContext(request))
-         </code></pre>
+        def learnmore(request):
+            return render(request, "learnmore.html")
+    </code></pre>
     <p>
         Essentially what this does is whenever the learnmore function is called, it will take the request, create an
         HttpResponse object and then
@@ -185,31 +171,17 @@
         <pre> <code> < input type = "button" class = 'btn btn-success center-block' onclick="resetarray()" value="Unsort
             Array" > </code></pre>
         <p>
-            The reset array works by going to a hidden div (div3) where the last array was stored and then restoring it
-            back to the visible div(div1) and saving a copy
-            in another hidden div(div2) for next use. The array size is used to cut off the visible array once it
+            The reset array works by going to a hidden div(dataset_submit) where the last array was stored and then restoring it
+            back to the visible div(dataset_display) The array size is used to cut off the visible array once it
             exceeds that size.
         </p>
         <pre> <code>
-           function resetarray()
-           {
-           var arraysize = 90;
-           var lastarray = document.getElementById('div3').innerHTML
-
-           if (lastarray.length == 0)
-           { }
-           else
-           {
-           $('#div2').text(lastarray);
-           var shortarray = shortenArray(arraysize)
-
-           if (shortarray.length > = arraysize)
-           { $('#div1').text(shortarray + "..."); }
-           else
-           {$('#div1').text(shortarray); }
-
-           $('#time').text("Time to Execute\:");
-           }
+        function resetDataset() {
+            div_id_from = "#dataset_submit"
+            div_id_to = "#dataset_display"
+            setDatasetDisplay(div_id_from, div_id_to)
+            $('#time_display').text("Time to Execute\:");
+        }
        </code> </pre>
 
         <p>
@@ -218,32 +190,32 @@
             Ajax was used to submit a request to the server, receive the response and update the page accordingly. Here
             is where Ajax makes a request to the server behind the scenes: </p>
         <pre> <code>
-
-                 $.ajax({
-                 type: "POST",
-                 url: url,
-                 data: {arraysize: arraysizeselect,
-                 csrfmiddlewaretoken: csrf_token
-                 },
-                 success: function(data)
-                 {
-                 $('#div2').text(data);
-                 var shortarray = shortenArray(arraysize);
-                 if (shortarray.length >=arraysize)
-                 { $('#div1').text(shortarray + "..."); }
-                 else
-                 {$('#div1').text(shortarray); }
-
-                 $('#div1').css({"font-size": "20px"});
-                 $('#time').text("Time to Execute\:");
-                 },
-                 error: function(data)
-                 {
-                 //window.alert("in error");
-                 $('#time').text("Array too big: please enter a shorter array size");
-                 $('#time').css({"font-size": "20px"});
-                 }
-                 });
+        _makeAjaxRequest: function (sort_name, current_dataset) {
+            var url = "/get_sort_result/";
+            csrf_token = this._getCsrfToken()
+            self = this
+            $.ajax({
+                type: "POST",
+                url: url,
+                dataType: "json",
+                traditional: true,
+                data: {
+                    dataset: current_dataset,
+                    csrfmiddlewaretoken: csrf_token,
+                    sort_name: sort_name
+                },
+                success: function (response_data) {
+                    if (response_data.error != "timeout") {
+                        self._setSortedResult(response_data)
+                    }
+                    else {
+                        self._setTimeoutError(response_data)
+                    }
+                },
+                error: function (response_data) {
+                    self._setDatasetError(response_data)
+                }
+            });
              </code></pre>
         <p>
             The .$.ajax function sets a call to the server, receives the response in the success or error function and
