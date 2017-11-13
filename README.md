@@ -13,9 +13,10 @@ A user will enter an integer value for the size of the array, click on "Get rand
 ## How to run this locally?
 1. git clone the repository
 2. Set up a virtualenv on your machine using "virtualenv <name for virtualenv folder> --no-site-packages"
-3. Install the required packages with "pip install -r requirements.txt" Requirements.txt is in the /requirements folder
-4. Run Django server with "python manage.py runserver" You can make this work for external connections with "python manage.py runserver 0.0.0.0:8000"
-5. Browse the website in your browser
+3. Activate the virtual env, cd into the folder you just created and type "source bin/activate"
+4. Install the required packages with "pip install -r requirements.txt" Requirements.txt is in the /requirements folder
+5. Run Django server with "python manage.py runserver" You can make this work for external connections with "python manage.py runserver 0.0.0.0:8000"
+6. Browse the website in your browser
   
 ## Ideas for future work
 I think it would be cool if we add a couple of more sorts such as radix sort and bucket sort to see how they perform.
