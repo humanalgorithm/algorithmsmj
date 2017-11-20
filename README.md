@@ -2,7 +2,7 @@
 
 ![AlgoMJ screenshot](algomj-screenshot.png "Screenshot of AlgorithmsMJ homepage")
 
-## Live at http://algorithmsmj.com
+## Under maintenance -> Will be back up shortly. 
 
 ## What is it?
 Algorithmsmj allows you to generate a random dataset and then sort it using some of the popular sorting algorithms. When you run sort on the dataset you will also get a time value letting you know how long it took to execute the sort. You can use this to see how different sorting algorithms take a longer or shorter time to execute for the same dataset.  
